@@ -1,96 +1,186 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
+<html lang="">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="CocoaPods私有库"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="Hexo">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="http://yoursite.com/2018/01/02/CocoaPods私有库/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
+
 
   
-  <title>CocoaPods私有库 | Hexo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本文主要介绍CocoaPods私有库的创建，做这件事的主要起因是，公司接过来一个外包的项目，项目中用到了他们的私有库，pod中可以看到源码，虽然直接将源码添加到工程中也是可行的，但本着学一点是一点的思想，借此机会尝试一下自己做一个私有库。 首先需要明确一个概念，私有仓库和私有库，类比CocoaPods的官方仓库，私有仓库就是整个库，其中会包含多个私有库以及同一个私有库的不同版本，在本机~/.coc">
-<meta property="og:type" content="article">
-<meta property="og:title" content="CocoaPods私有库">
-<meta property="og:url" content="http://yoursite.com/2018/01/02/CocoaPods私有库/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="本文主要介绍CocoaPods私有库的创建，做这件事的主要起因是，公司接过来一个外包的项目，项目中用到了他们的私有库，pod中可以看到源码，虽然直接将源码添加到工程中也是可行的，但本着学一点是一点的思想，借此机会尝试一下自己做一个私有库。 首先需要明确一个概念，私有仓库和私有库，类比CocoaPods的官方仓库，私有仓库就是整个库，其中会包含多个私有库以及同一个私有库的不同版本，在本机~/.coc">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5558134-30b18a91a1716e1b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/420">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5558134-451f515a35b39d0d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/420">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5558134-153a297f8a4b632a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/420">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5558134-367280faed326800.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/420">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5558134-95210dd0bb89e4e8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/420">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/5558134-9a29b8f900ddb63f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/420">
-<meta property="og:updated_time" content="2018-01-02T05:57:23.447Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="CocoaPods私有库">
-<meta name="twitter:description" content="本文主要介绍CocoaPods私有库的创建，做这件事的主要起因是，公司接过来一个外包的项目，项目中用到了他们的私有库，pod中可以看到源码，虽然直接将源码添加到工程中也是可行的，但本着学一点是一点的思想，借此机会尝试一下自己做一个私有库。 首先需要明确一个概念，私有仓库和私有库，类比CocoaPods的官方仓库，私有仓库就是整个库，其中会包含多个私有库以及同一个私有库的不同版本，在本机~/.coc">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/5558134-30b18a91a1716e1b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/420">
-  
-    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link rel="stylesheet" href="/css/style.css">
-</head>
 
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">Hexo</a>
-      </h1>
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> CocoaPods私有库 - Hexo </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Hexo</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Hexo</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
       
-    </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="Suche"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-CocoaPods私有库" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2018/01/02/CocoaPods私有库/" class="article-date">
-  <time datetime="2018-01-02T05:56:28.000Z" itemprop="datePublished">2018-01-02</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+    </ul>
   
-    <h1 class="article-title" itemprop="name">
-      CocoaPods私有库
-    </h1>
-  
+</nav>
 
       </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          CocoaPods私有库
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-01-02
+        </span>
+        
+        
+      </div>
+    </header>
+
     
-    <div class="article-entry" itemprop="articleBody">
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建CocoaPods私有仓库"><span class="toc-text">创建CocoaPods私有仓库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#添加私有库代码"><span class="toc-text">添加私有库代码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建私有库"><span class="toc-text">创建私有库</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#创建podspec文件"><span class="toc-text">创建podspec文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#编辑podspec文件（大概介绍一下podspec文件中的每个字段的含义）"><span class="toc-text">编辑podspec文件（大概介绍一下podspec文件中的每个字段的含义）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#验证podspec文件"><span class="toc-text">验证podspec文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#本地调用验证"><span class="toc-text">本地调用验证</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#将podspec文件推送到远程仓库"><span class="toc-text">将podspec文件推送到远程仓库</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用私有库"><span class="toc-text">使用私有库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#一些问题"><span class="toc-text">一些问题</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#引用的文件生成的framework，此处感谢此分享的提示"><span class="toc-text">引用的文件生成的framework，此处感谢此分享的提示</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#git-push-origin-master比较慢"><span class="toc-text">git push origin master比较慢</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#感谢资源分享"><span class="toc-text">感谢资源分享</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
       
         <p>本文主要介绍CocoaPods私有库的创建，做这件事的主要起因是，公司接过来一个外包的项目，项目中用到了他们的私有库，pod中可以看到源码，虽然直接将源码添加到工程中也是可行的，但本着学一点是一点的思想，借此机会尝试一下自己做一个私有库。</p>
 <p>首先需要明确一个概念，私有仓库和私有库，类比CocoaPods的官方仓库，私有仓库就是整个库，其中会包含多个私有库以及同一个私有库的不同版本，在本机<code>~/.cocoapods/repos/</code>路径下，CocoaPods官方仓库位于master文件夹中，<code>~/.cocoapods/repos/master/Specs</code>文件夹下保存的就是各个开源库的podspec文件。在终端执行<code>pod repo list</code>可以查看本地仓库，名字为master的就是官方仓库。</p>
@@ -215,101 +305,162 @@
 
       
     </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2018/01/02/CocoaPods私有库/" data-id="cjbx82kt100004b9kfko0d26i" class="article-share-link">Teilen</a>
+
+    
       
       
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-  
-    <a href="/2018/01/02/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Älter</strong>
-      <div class="article-nav-title">Hello World</div>
-    </a>
-  
-</nav>
 
-  
-</article>
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">Archiv</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/01/">January 2018</a></li></ul>
-    </div>
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="http://yoursite.com">John Doe</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="http://yoursite.com/2018/01/02/CocoaPods私有库/">http://yoursite.com/2018/01/02/CocoaPods私有库/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
   </div>
 
 
-  
+
+      
+      
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">letzter Beitrag</h3>
-    <div class="widget">
-      <ul>
+
+    
+      <footer class="post-footer">
         
-          <li>
-            <a href="/2018/01/02/CocoaPods私有库/">CocoaPods私有库</a>
-          </li>
         
-          <li>
-            <a href="/2018/01/02/hello-world/">Hello World</a>
-          </li>
         
-      </ul>
-    </div>
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2018/01/02/hello-world/">
+        <span class="next-text nav-default">Hello World</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
   </div>
 
-  
-</aside>
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
         
+          <a href="mailto:your@email.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2015 - 
+    
+    2018
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">John Doe</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
       </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2018 John Doe<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
+
+    
   
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
+
+
+
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-  <script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/js/script.js"></script>
 
 
 
-  </div>
-</body>
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+
+  </body>
 </html>
