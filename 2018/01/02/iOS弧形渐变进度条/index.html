@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="iOS弧形渐变进度条"/>
+
+
+
+
+  <meta name="keywords" content="iOS, rapunzel blog" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="rapunzel blog">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="https://rapunzelyeah.github.io/2018/01/02/iOS弧形渐变进度条/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> iOS弧形渐变进度条 - rapunzel blog </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">rapunzel blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">rapunzel blog</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          iOS弧形渐变进度条
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-01-02
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#弧形渐变效果图"><span class="toc-text">弧形渐变效果图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CAShapeLayer"><span class="toc-text">CAShapeLayer</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本属性设置"><span class="toc-text">基本属性设置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#属性介绍"><span class="toc-text">属性介绍</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#strokeStart属性和strokeEnd属性"><span class="toc-text">strokeStart属性和strokeEnd属性</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CAGradientLayer"><span class="toc-text">CAGradientLayer</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#基本属性设置，并给CAShapeLayer添加渐变色。做成的整体的进度条效果。"><span class="toc-text">基本属性设置，并给CAShapeLayer添加渐变色。做成的整体的进度条效果。</span></a></li></ol></li></ol></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <h2 id="弧形渐变效果图"><a href="#弧形渐变效果图" class="headerlink" title="弧形渐变效果图"></a>弧形渐变效果图</h2><p>先祭上最终的效果图：<br><img src="http://upload-images.jianshu.io/upload_images/5558134-0202a8f7f8fce4a7.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="IMG_0114.PNG-w150"></p>
+<h2 id="CAShapeLayer"><a href="#CAShapeLayer" class="headerlink" title="CAShapeLayer"></a>CAShapeLayer</h2><h3 id="基本属性设置"><a href="#基本属性设置" class="headerlink" title="基本属性设置"></a>基本属性设置</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">CAShapeLayer</span> *shapeLayer = [<span class="built_in">CAShapeLayer</span> layer];</span><br><span class="line">        shapeLayer.path = [<span class="built_in">UIBezierPath</span></span><br><span class="line">                           bezierPathWithArcCenter:<span class="built_in">CGPointMake</span>(<span class="keyword">self</span>.frame.size.width * <span class="number">0.5</span>, <span class="keyword">self</span>.frame.size.height * <span class="number">0.5</span> + <span class="number">110</span>)</span><br><span class="line">                           radius:<span class="number">120</span></span><br><span class="line">                           startAngle:(<span class="number">150.</span>f * M_PI) / <span class="number">180.</span>f</span><br><span class="line">                           endAngle:(<span class="number">390.</span>f * M_PI) / <span class="number">180.</span>f</span><br><span class="line">                           clockwise:<span class="number">1</span>].CGPath;</span><br><span class="line">        shapeLayer.fillColor = [<span class="built_in">UIColor</span> clearColor].CGColor;</span><br><span class="line">        shapeLayer.strokeColor = [<span class="built_in">UIColor</span> lightGrayColor].CGColor;</span><br><span class="line">        shapeLayer.lineWidth = <span class="number">15.</span>f;</span><br><span class="line">        shapeLayer.lineCap = kCALineCapRound;</span><br><span class="line">        shapeLayer.opacity = <span class="number">0.8</span>;</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<h3 id="属性介绍"><a href="#属性介绍" class="headerlink" title="属性介绍"></a>属性介绍</h3><h4 id="strokeStart属性和strokeEnd属性"><a href="#strokeStart属性和strokeEnd属性" class="headerlink" title="strokeStart属性和strokeEnd属性"></a>strokeStart属性和strokeEnd属性</h4><p><code>strokeStart</code>和<code>strokeEnd</code>是一个0-1的取值范围。表示一段路径的开始和结尾。比如开始位置为0.5，结束位置为1，那就只渲染出后半段的路径。<br><code>strokeStart</code> 翻译过来就是清除开始位置。<br><code>strokeEnd</code>   意思就是清除结束的位置。</p>
+<ul>
+<li><code>keyPath = strokeStart</code> 动画的<code>fromValue = 0，toValue = 1</code>：<br>表示从路径的0位置画到1，怎么画是按照清除开始的位置也就是清除0，一直清除到1，效果就是一条路径慢慢的消失。</li>
+<li><code>keyPath = strokeStart</code> 动画的<code>fromValue = 1，toValue = 0</code>：<br>表示从路径的1位置画到0，怎么画是按照清除开始的位置也就是1，这样开始的路径是空的（即都被清除掉了）一直清除到0，效果就是一条路径被反方向画出来。</li>
+<li><code>keyPath = strokeEnd</code> 动画的<code>fromValue = 0，toValue = 1</code>：<br>表示这里我们分3个点说明动画的顺序，strokeEnd从结尾开始清除，首先整条路径先清除后2/3，接着清除1/3，效果就是正方向画出路径。</li>
+<li><code>keyPath = strokeEnd</code> 动画的<code>fromValue = 1，toValue = 0</code>：<br>效果就是反方向路径慢慢消失。</li>
+</ul>
+<p>那么我们就可以利用<code>strokeStart</code>和<code>strokeEnd</code>这两个属性，对<code>CAShapeLayer</code>进行添加动画，在设置<code>percent</code>时，进度条就会出现增大，和减少的两种动态效果。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)setPercent:(<span class="built_in">CGFloat</span>)percent &#123;</span><br><span class="line">    _shapeLayer.path = [<span class="built_in">UIBezierPath</span> bezierPathWithArcCenter:<span class="built_in">CGPointMake</span>(<span class="keyword">self</span>.frame.size.width * <span class="number">0.5</span>, <span class="keyword">self</span>.frame.size.height * <span class="number">0.5</span> + <span class="number">110</span>) radius:<span class="number">120</span> startAngle:(<span class="number">150.</span>f * M_PI) / <span class="number">180.</span>f endAngle:((<span class="number">240.</span>f * (percent - <span class="number">150.</span>f) / <span class="number">800.</span>f + <span class="number">150.</span>f) * M_PI) / <span class="number">180.</span>f clockwise:<span class="number">1</span>].CGPath;</span><br><span class="line">    <span class="built_in">CGFloat</span> value = (percent - <span class="number">150.</span>f) / <span class="number">800.</span>f;   <span class="comment">//计算进度条的位置点</span></span><br><span class="line">    _shapeLayer.strokeStart = MIN(<span class="number">0</span>, value);</span><br><span class="line">    _shapeLayer.strokeEnd = MAX(<span class="number">0</span>, value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="CAGradientLayer"><a href="#CAGradientLayer" class="headerlink" title="CAGradientLayer"></a>CAGradientLayer</h2><h4 id="基本属性设置，并给CAShapeLayer添加渐变色。做成的整体的进度条效果。"><a href="#基本属性设置，并给CAShapeLayer添加渐变色。做成的整体的进度条效果。" class="headerlink" title="基本属性设置，并给CAShapeLayer添加渐变色。做成的整体的进度条效果。"></a>基本属性设置，并给CAShapeLayer添加渐变色。做成的整体的进度条效果。</h4><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">instancetype</span>)initWithFrame:(<span class="built_in">CGRect</span>)frame &#123;</span><br><span class="line">    <span class="keyword">self</span> = [<span class="keyword">super</span> initWithFrame:frame];</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span>) &#123;</span><br><span class="line">        <span class="built_in">CAShapeLayer</span> *shapeLayer = [<span class="built_in">CAShapeLayer</span> layer];</span><br><span class="line">        shapeLayer.path = [<span class="built_in">UIBezierPath</span></span><br><span class="line">                           bezierPathWithArcCenter:<span class="built_in">CGPointMake</span>(<span class="keyword">self</span>.frame.size.width * <span class="number">0.5</span>, <span class="keyword">self</span>.frame.size.height * <span class="number">0.5</span> + <span class="number">110</span>)</span><br><span class="line">                           radius:<span class="number">120</span></span><br><span class="line">                           startAngle:(<span class="number">150.</span>f * M_PI) / <span class="number">180.</span>f</span><br><span class="line">                           endAngle:(<span class="number">390.</span>f * M_PI) / <span class="number">180.</span>f</span><br><span class="line">                           clockwise:<span class="number">1</span>].CGPath;</span><br><span class="line">        shapeLayer.fillColor = [<span class="built_in">UIColor</span> clearColor].CGColor;</span><br><span class="line">        shapeLayer.strokeColor = [<span class="built_in">UIColor</span> lightGrayColor].CGColor;</span><br><span class="line">        shapeLayer.lineWidth = <span class="number">15.</span>f;</span><br><span class="line">        shapeLayer.lineCap = kCALineCapRound;</span><br><span class="line">        shapeLayer.opacity = <span class="number">0.8</span>;</span><br><span class="line">        _shapeLayer = shapeLayer;</span><br><span class="line">        <span class="comment">//上方层</span></span><br><span class="line">        <span class="built_in">CAGradientLayer</span> *gradientLayer1 = [<span class="built_in">CAGradientLayer</span> layer];</span><br><span class="line">        gradientLayer1.frame = <span class="keyword">self</span>.frame;</span><br><span class="line">        gradientLayer1.colors = <span class="keyword">self</span>.colorsTop;</span><br><span class="line">        gradientLayer1.startPoint = <span class="built_in">CGPointMake</span>(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        gradientLayer1.endPoint = <span class="built_in">CGPointMake</span>(<span class="number">1</span>, <span class="number">0</span>);</span><br><span class="line">        gradientLayer1.mask = shapeLayer;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//左下层</span></span><br><span class="line">        <span class="built_in">CAGradientLayer</span> *gradientLayer2 = [<span class="built_in">CAGradientLayer</span> layer];</span><br><span class="line">        gradientLayer2.frame = <span class="built_in">CGRectMake</span>(<span class="number">0</span>, SHEIGHT / <span class="number">2.</span>f + circleRadius / <span class="number">3.</span>f , SWIDTH / <span class="number">2</span>, circleRadius * <span class="number">1.3</span>);</span><br><span class="line">        gradientLayer2.colors = <span class="keyword">self</span>.colorsLeftBottom;</span><br><span class="line">        gradientLayer2.startPoint = <span class="built_in">CGPointMake</span>(<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">        gradientLayer2.endPoint = <span class="built_in">CGPointMake</span>(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        </span><br><span class="line">        <span class="comment">//右下层</span></span><br><span class="line">        <span class="built_in">CAGradientLayer</span> *gradientLayer3 = [<span class="built_in">CAGradientLayer</span> layer];</span><br><span class="line">        gradientLayer3.frame = <span class="built_in">CGRectMake</span>(SWIDTH / <span class="number">2</span>, SHEIGHT / <span class="number">2.</span>f + circleRadius / <span class="number">3.</span>f , SWIDTH / <span class="number">2</span>, circleRadius * <span class="number">1.3</span>);</span><br><span class="line">        gradientLayer3.colors = <span class="keyword">self</span>.colorsRightBottom;</span><br><span class="line">        gradientLayer3.startPoint = <span class="built_in">CGPointMake</span>(<span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line">        gradientLayer3.endPoint = <span class="built_in">CGPointMake</span>(<span class="number">0</span>, <span class="number">1</span>);</span><br><span class="line">        </span><br><span class="line">        [<span class="keyword">self</span>.layer addSublayer:gradientLayer1];</span><br><span class="line">        [gradientLayer1 addSublayer:gradientLayer2];</span><br><span class="line">        [gradientLayer1 addSublayer:gradientLayer3];</span><br><span class="line">        [gradientLayer1 setLocations:@[@<span class="number">0.35</span>,@<span class="number">0.5</span>,@<span class="number">0.75</span>]];</span><br><span class="line">        [gradientLayer3 setLocations:@[@<span class="number">0.2</span>,@<span class="number">0.5</span>,@<span class="number">0.75</span>]];</span><br><span class="line">        [gradientLayer2 setLocations:@[@<span class="number">0.2</span>,@<span class="number">0.5</span>,@<span class="number">0.75</span>]];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="built_in">NSMutableArray</span> *)colorsTop &#123;</span><br><span class="line">    <span class="keyword">if</span> (!_colorsTop) &#123;</span><br><span class="line">        _colorsTop = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line">        [_colorsTop addObject:(__bridge <span class="keyword">id</span>)RGB(<span class="number">0xe2</span>, <span class="number">0xf2</span>, <span class="number">0x69</span>).CGColor];</span><br><span class="line">        [_colorsTop addObject:(__bridge <span class="keyword">id</span>)RGB(<span class="number">0xff</span>, <span class="number">0xcf</span>, <span class="number">0x57</span>).CGColor];</span><br><span class="line">        [_colorsTop addObject:(__bridge <span class="keyword">id</span>)RGB(<span class="number">0xff</span>, <span class="number">0xa8</span>, <span class="number">0x4c</span>).CGColor];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _colorsTop;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="built_in">NSMutableArray</span> *)colorsLeftBottom &#123;</span><br><span class="line">    <span class="keyword">if</span> (!_colorsLeftBottom) &#123;</span><br><span class="line">        _colorsLeftBottom = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line">        [_colorsLeftBottom addObject:(__bridge <span class="keyword">id</span>)RGB(<span class="number">0x73</span>, <span class="number">0xf2</span>, <span class="number">0x92</span>).CGColor];</span><br><span class="line">        [_colorsLeftBottom addObject:(__bridge <span class="keyword">id</span>)RGB(<span class="number">0xab</span>, <span class="number">0xf2</span>, <span class="number">0x6e</span>).CGColor];</span><br><span class="line">        [_colorsLeftBottom addObject:(__bridge <span class="keyword">id</span>)RGB(<span class="number">0xe2</span>, <span class="number">0xf2</span>, <span class="number">0x69</span>).CGColor];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _colorsLeftBottom;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="built_in">NSMutableArray</span> *)colorsRightBottom &#123;</span><br><span class="line">    <span class="keyword">if</span> (!_colorsRightBottom) &#123;</span><br><span class="line">        _colorsRightBottom = [<span class="built_in">NSMutableArray</span> array];</span><br><span class="line">        [_colorsRightBottom addObject:(__bridge <span class="keyword">id</span>)RGB(<span class="number">0xff</span>, <span class="number">0xa8</span>, <span class="number">0x4c</span>).CGColor];</span><br><span class="line">        [_colorsRightBottom addObject:(__bridge <span class="keyword">id</span>)RGB(<span class="number">0xff</span>, <span class="number">0x80</span>, <span class="number">0x4c</span>).CGColor];</span><br><span class="line">        [_colorsRightBottom addObject:(__bridge <span class="keyword">id</span>)RGB(<span class="number">0xe2</span>, <span class="number">0x56</span>, <span class="number">0x4c</span>).CGColor];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> _colorsRightBottom;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)setPercent:(<span class="built_in">CGFloat</span>)percent &#123;</span><br><span class="line"><span class="comment">//    _shapeLayer.path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(self.frame.size.width * 0.5, self.frame.size.height * 0.5 + 110) radius:120 startAngle:degreesToRadians(150.f) endAngle:degreesToRadians(percent / 200.f * 240.f + 150.f) clockwise:1].CGPath;</span></span><br><span class="line">    <span class="built_in">CGFloat</span> value = percent / <span class="number">200.</span>f;   <span class="comment">//计算进度条的位置点</span></span><br><span class="line">    _shapeLayer.strokeStart = MIN(<span class="number">0</span>, value);</span><br><span class="line">    _shapeLayer.strokeEnd = MAX(<span class="number">0</span>, value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>关于<code>CABasicAnimation</code>，使用<code>strokeStart</code>和<code>strokeEnd</code>做动画时，可以不添加这个<code>animation</code>，也是有动画效果的，在进度条偶尔增大偶尔减少时我觉得用属性设置的方式比较好。<br>关于设置渐变色的位置，在未添加<code>gradientLayer</code>的<code>mask</code>的效果如图，这样可以更清楚的看到，三种颜色过渡方式，上方为从左向右进行过渡，左下方为从下到上进行过渡，右下方为从上到下进行过渡，看到整体效果后，再去添加<code>mask</code>，就可以实现一个平滑的弧形过渡啦。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/5558134-14525883595d92d7.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="IMG_0115.PNG"></p>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="https://rapunzelyeah.github.io">rapunzel</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="https://rapunzelyeah.github.io/2018/01/02/iOS弧形渐变进度条/">https://rapunzelyeah.github.io/2018/01/02/iOS弧形渐变进度条/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/iOS/">iOS</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2018/01/02/CocoaPods私有库/">
+        <span class="next-text nav-default">CocoaPods私有库</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:doubleday731@163.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/rapunzelyeah" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+        
+          <a href="https://www.zhihu.com/people/rapunzel-10/activities" class="iconfont icon-zhihu" title="zhihu"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2016 - 
+    
+    2018
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">rapunzel</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+
+  </body>
+</html>
