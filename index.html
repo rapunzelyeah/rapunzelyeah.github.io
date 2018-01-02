@@ -112,6 +112,24 @@
         </li>
       </a>
     
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
   </ul>
 </nav>
 
@@ -142,6 +160,24 @@
           </a>
         </li>
       
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
     </ul>
   
 </nav>
@@ -168,6 +204,12 @@
           2018-01-02
         </span>
         
+          <div class="post-category">
+            
+              <a href="/categories/iOS开发/">iOS开发</a>
+            
+          </div>
+        
         
       </div>
     </header>
@@ -184,7 +226,8 @@
 
         
           <p>本文主要介绍CocoaPods私有库的创建，做这件事的主要起因是，公司接过来一个外包的项目，项目中用到了他们的私有库，pod中可以看到源码，虽然直接将源码添加到工程中也是可行的，但本着学一点是一点的思想，借此机会尝试一下自己做一个私有库。</p>
-<p>首先需要明确一个概念，私有仓库和私有库，类比CocoaPods的官方仓库，私有仓库就是整个库，其中会包含多个私有库以及同一个私有库的不同版本，在本机<code>~/.cocoapods/repos/</code>路径下，CocoaPods官方仓库位于master文件夹中，<code>~/.cocoapods/repos/master/Specs</code>文件夹下保存的就是各个开源库的podspec文件。在终端执行<code>pod repo list</code>可以查看本地仓库，名字为master的就是官方仓库。<br>
+<p>首先需要明确一个概念，私有仓库和私有库，类比CocoaPods的官方仓库，私有仓库就是整个库，其中会包含多个私有库以及同一个私有库的不同版本，在本机<code>~/.cocoapods/repos/</code>路径下，CocoaPods官方仓库位于master文件夹中，<code>~/.cocoapods/repos/master/Specs</code>文件夹下保存的就是各个开源库的podspec文件。在终端执行<code>pod repo list</code>可以查看本地仓库，名字为master的就是官方仓库。</p>
+<p>因此，在私有库创建之前，首先要创建一个私有的仓库：</p>
           <div class="read-more">
             <a href="/2018/01/02/CocoaPods私有库/" class="read-more-link">阅读更多</a>
           </div>
@@ -204,7 +247,7 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          <a class="post-link" href="/2018/01/02/hello-world/">Hello World</a>
+          <a class="post-link" href="/2018/01/02/hello-world/">新博客你好</a>
         
       </h1>
 
@@ -224,18 +267,14 @@
       
         
         
+          
+        
 
         
-          <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
+          <p>这个博客主要用来记录一些学习知识，包括各种内容，随手记录，随后回顾。<br>
+          <div class="read-more">
+            <a href="/2018/01/02/hello-world/" class="read-more-link">阅读更多</a>
+          </div>
         
       
     </div>
@@ -290,6 +329,10 @@
     
       
     
+      
+        
+          <a href="https://www.zhihu.com/people/rapunzel-10/activities" class="iconfont icon-zhihu" title="zhihu"></a>
+        
       
     
       
