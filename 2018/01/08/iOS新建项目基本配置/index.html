@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="iOS新建项目基本配置"/>
+
+
+
+
+  <meta name="keywords" content="iOS, rapunzel blog" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="rapunzel blog">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="https://rapunzelyeah.github.io/2018/01/08/iOS新建项目基本配置/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> iOS新建项目基本配置 - rapunzel blog </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">rapunzel blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">rapunzel blog</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          iOS新建项目基本配置
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-01-08
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/iOS开发/">iOS开发</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#公共头文件编译"><span class="toc-text">公共头文件编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pch文件配置"><span class="toc-text">pch文件配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Missing-file警告"><span class="toc-text">Missing file警告</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#状态栏颜色设置"><span class="toc-text">状态栏颜色设置</span></a></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <p>每次新建一个项目时，总是会忘记配置一些内容，然后需要各种查找解决方案，现在记录起来，逐渐扩充，以后再新建项目直接过来找答案就可以。</p>
+<h3 id="公共头文件编译"><a href="#公共头文件编译" class="headerlink" title="公共头文件编译"></a>公共头文件编译</h3><p>项目中涉及到C++混编时，需要修改此项，<code>Build Settings - Compile Sources As</code> 设置为<code>Objective-C++</code></p>
+<h3 id="pch文件配置"><a href="#pch文件配置" class="headerlink" title="pch文件配置"></a>pch文件配置</h3><ul>
+<li><code>Precompile Prefix Header</code>设置为<code>Yes</code></li>
+<li><code>Prefix Header</code>路径设置为<code>$(SRCROOT)/$(PROJECT_NAME)/PrefixHeader.pch</code></li>
+</ul>
+<a id="more"></a>
+<h3 id="Missing-file警告"><a href="#Missing-file警告" class="headerlink" title="Missing file警告"></a>Missing file警告</h3><p>这里主要是由于Xcode中内置的git提示文件版本的问题，因此可以假装提交一下git，执行以下语句：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> PROJECT_PATH</span><br><span class="line">git add .</span><br></pre></td></tr></table></figure></p>
+<p>然后重新打开Xcode。</p>
+<h3 id="状态栏颜色设置"><a href="#状态栏颜色设置" class="headerlink" title="状态栏颜色设置"></a>状态栏颜色设置</h3><p>状态栏的字体为黑色：<code>UIStatusBarStyleDefault</code><br>状态栏的字体为白色：<code>UIStatusBarStyleLightContent</code></p>
+<ol>
+<li>在info.plist中：<br>将<code>View controller-based status bar appearance</code>设置为<code>NO</code>显示为白色，<code>YES</code>则显示黑色<br>如果<code>View controller-based status bar appearance</code>为<code>YES</code>，则<code>[UIApplication sharedApplication].statusBarStyle</code>的设置变成无效。</li>
+<li><p>在<code>App delegate</code>中：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="built_in">UIApplication</span> sharedApplication].statusBarStyle = <span class="built_in">UIStatusBarStyleLightContent</span>;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在个别状态栏字体颜色不一样的vc中：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)viewWillAppear:(<span class="built_in">BOOL</span>)animated &#123;</span><br><span class="line">    [<span class="built_in">UIApplication</span> sharedApplication].statusBarStyle = <span class="built_in">UIStatusBarStyleDefault</span>;</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="keyword">void</span>)viewWillDisappear:(<span class="built_in">BOOL</span>)animated &#123;</span><br><span class="line">    [<span class="keyword">super</span> viewWillDisappear:animated];</span><br><span class="line">    [<span class="built_in">UIApplication</span> sharedApplication].statusBarStyle = <span class="built_in">UIStatusBarStyleLightContent</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>用下面的方法：</p>
+<ol>
+<li><p>在vc中重写vc的<code>preferredStatusBarStyle</code>方法。</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="built_in">UIStatusBarStyle</span>)preferredStatusBarStyle &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">UIStatusBarStyleDefault</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>在<code>viewDidload</code>中调用：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="keyword">self</span> setNeedsStatusBarAppearanceUpdate];</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>但是，当vc在nav中时，上面方法没用，vc中的<code>preferredStatusBarStyle</code>方法根本不用被调用。<br>原因是，<code>[self setNeedsStatusBarAppearanceUpdate]</code>发出后，只会调用navigation controller中的<code>preferredStatusBarStyle</code>方法，vc中的<code>preferredStatusBarStyley</code>方法不会被调用。<br>解决办法有两个：<br>方法一：<br>设置navbar的<code>barStyle</code>属性会影响status bar的字体和背景色,如下。<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//status bar的字体为白色</span></span><br><span class="line"><span class="comment">//导航栏的背景色是黑色。</span></span><br><span class="line"><span class="keyword">self</span>.navigationController.navigationBar.barStyle = <span class="built_in">UIBarStyleBlack</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//status bar的字体为黑色</span></span><br><span class="line"><span class="comment">//导航栏的背景色是白色，状态栏的背景色也是白色。</span></span><br><span class="line"><span class="comment">//self.navigationController.navigationBar.barStyle = UIBarStyleDefault;</span></span><br></pre></td></tr></table></figure></p>
+<p>方法二：<br>自定义一个nav bar的子类，在这个子类中重写<code>preferredStatusBarStyle</code>方法：<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">MyNav* nav = [[MyNav alloc] initWithRootViewController:vc];</span><br><span class="line"><span class="keyword">self</span>.window.rootViewController = nav;</span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">MyNav</span></span></span><br><span class="line">-  (<span class="built_in">UIStatusBarStyle</span>)preferredStatusBarStyle &#123;</span><br><span class="line">    <span class="built_in">UIViewController</span>* topVC = <span class="keyword">self</span>.topViewController;</span><br><span class="line">    <span class="keyword">return</span> [topVC preferredStatusBarStyle];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="https://rapunzelyeah.github.io">rapunzel</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="https://rapunzelyeah.github.io/2018/01/08/iOS新建项目基本配置/">https://rapunzelyeah.github.io/2018/01/08/iOS新建项目基本配置/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/iOS/">iOS</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2018/01/02/iOS弧形渐变进度条/">
+        <span class="next-text nav-default">iOS弧形渐变进度条</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:doubleday731@163.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/rapunzelyeah" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+        
+          <a href="https://www.zhihu.com/people/rapunzel-10/activities" class="iconfont icon-zhihu" title="zhihu"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2016 - 
+    
+    2018
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">rapunzel</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+
+  </body>
+</html>
