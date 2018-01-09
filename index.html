@@ -227,10 +227,7 @@
         
           <p>每次新建一个项目时，总是会忘记配置一些内容，然后需要各种查找解决方案，现在记录起来，逐渐扩充，以后再新建项目直接过来找答案就可以。</p>
 <h3 id="公共头文件编译"><a href="#公共头文件编译" class="headerlink" title="公共头文件编译"></a>公共头文件编译</h3><p>项目中涉及到C++混编时，需要修改此项，<code>Build Settings - Compile Sources As</code> 设置为<code>Objective-C++</code></p>
-<h3 id="pch文件配置"><a href="#pch文件配置" class="headerlink" title="pch文件配置"></a>pch文件配置</h3><ul>
-<li><code>Precompile Prefix Header</code>设置为<code>Yes</code></li>
-<li><code>Prefix Header</code>路径设置为<code>$(SRCROOT)/$(PROJECT_NAME)/PrefixHeader.pch</code></li>
-</ul>
+<h3 id="podfile"><a href="#podfile" class="headerlink" title="podfile"></a>podfile</h3><p>如果项目为OC，而Cocoapods中使用了swift的第三方库，或者项目为swift使用OC的第三方库，则在<code>podfile</code>中需要添加<code>use_frameworks!</code>这一句。同时，在OC项目中还需要设置<code>Build Settings - Build Options - Always Embed Swift Standard Libraries</code>为<code>Yes</code>。</p>
           <div class="read-more">
             <a href="/2018/01/08/iOS新建项目基本配置/" class="read-more-link">阅读更多</a>
           </div>
@@ -280,7 +277,7 @@
         
 
         
-          <h2 id="弧形渐变效果图"><a href="#弧形渐变效果图" class="headerlink" title="弧形渐变效果图"></a>弧形渐变效果图</h2><p>先祭上最终的效果图：<br><img src="http://upload-images.jianshu.io/upload_images/5558134-0202a8f7f8fce4a7.PNG?imageMogr2/auto-orient/strip%7CimageView2/2/w/400" alt="IMG_0114.PNG-w150"></p>
+          <h2 id="弧形渐变效果图"><a href="#弧形渐变效果图" class="headerlink" title="弧形渐变效果图"></a>弧形渐变效果图</h2><p>先祭上最终的效果图：<br><img src="resources/img3-1.png" alt="效果图"></p>
 <h2 id="CAShapeLayer"><a href="#CAShapeLayer" class="headerlink" title="CAShapeLayer"></a>CAShapeLayer</h2><h3 id="基本属性设置"><a href="#基本属性设置" class="headerlink" title="基本属性设置"></a>基本属性设置</h3><figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">CAShapeLayer</span> *shapeLayer = [<span class="built_in">CAShapeLayer</span> layer];</span><br><span class="line">        shapeLayer.path = [<span class="built_in">UIBezierPath</span></span><br><span class="line">                           bezierPathWithArcCenter:<span class="built_in">CGPointMake</span>(<span class="keyword">self</span>.frame.size.width * <span class="number">0.5</span>, <span class="keyword">self</span>.frame.size.height * <span class="number">0.5</span> + <span class="number">110</span>)</span><br><span class="line">                           radius:<span class="number">120</span></span><br><span class="line">                           startAngle:(<span class="number">150.</span>f * M_PI) / <span class="number">180.</span>f</span><br><span class="line">                           endAngle:(<span class="number">390.</span>f * M_PI) / <span class="number">180.</span>f</span><br><span class="line">                           clockwise:<span class="number">1</span>].CGPath;</span><br><span class="line">        shapeLayer.fillColor = [<span class="built_in">UIColor</span> clearColor].CGColor;</span><br><span class="line">        shapeLayer.strokeColor = [<span class="built_in">UIColor</span> lightGrayColor].CGColor;</span><br><span class="line">        shapeLayer.lineWidth = <span class="number">15.</span>f;</span><br><span class="line">        shapeLayer.lineCap = kCALineCapRound;</span><br><span class="line">        shapeLayer.opacity = <span class="number">0.8</span>;</span><br></pre></td></tr></table></figure>
           <div class="read-more">
             <a href="/2018/01/02/iOS弧形渐变进度条/" class="read-more-link">阅读更多</a>

@@ -219,7 +219,7 @@
   <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#公共头文件编译"><span class="toc-text">公共头文件编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pch文件配置"><span class="toc-text">pch文件配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Missing-file警告"><span class="toc-text">Missing file警告</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#状态栏颜色设置"><span class="toc-text">状态栏颜色设置</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#公共头文件编译"><span class="toc-text">公共头文件编译</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#podfile"><span class="toc-text">podfile</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#pch文件配置"><span class="toc-text">pch文件配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Missing-file警告"><span class="toc-text">Missing file警告</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#状态栏颜色设置"><span class="toc-text">状态栏颜色设置</span></a></li></ol>
     </div>
   </div>
 
@@ -228,11 +228,12 @@
       
         <p>每次新建一个项目时，总是会忘记配置一些内容，然后需要各种查找解决方案，现在记录起来，逐渐扩充，以后再新建项目直接过来找答案就可以。</p>
 <h3 id="公共头文件编译"><a href="#公共头文件编译" class="headerlink" title="公共头文件编译"></a>公共头文件编译</h3><p>项目中涉及到C++混编时，需要修改此项，<code>Build Settings - Compile Sources As</code> 设置为<code>Objective-C++</code></p>
+<h3 id="podfile"><a href="#podfile" class="headerlink" title="podfile"></a>podfile</h3><p>如果项目为OC，而Cocoapods中使用了swift的第三方库，或者项目为swift使用OC的第三方库，则在<code>podfile</code>中需要添加<code>use_frameworks!</code>这一句。同时，在OC项目中还需要设置<code>Build Settings - Build Options - Always Embed Swift Standard Libraries</code>为<code>Yes</code>。</p>
+<a id="more"></a>
 <h3 id="pch文件配置"><a href="#pch文件配置" class="headerlink" title="pch文件配置"></a>pch文件配置</h3><ul>
 <li><code>Precompile Prefix Header</code>设置为<code>Yes</code></li>
 <li><code>Prefix Header</code>路径设置为<code>$(SRCROOT)/$(PROJECT_NAME)/PrefixHeader.pch</code></li>
 </ul>
-<a id="more"></a>
 <h3 id="Missing-file警告"><a href="#Missing-file警告" class="headerlink" title="Missing file警告"></a>Missing file警告</h3><p>这里主要是由于Xcode中内置的git提示文件版本的问题，因此可以假装提交一下git，执行以下语句：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> PROJECT_PATH</span><br><span class="line">git add .</span><br></pre></td></tr></table></figure></p>
 <p>然后重新打开Xcode。</p>
 <h3 id="状态栏颜色设置"><a href="#状态栏颜色设置" class="headerlink" title="状态栏颜色设置"></a>状态栏颜色设置</h3><p>状态栏的字体为黑色：<code>UIStatusBarStyleDefault</code><br>状态栏的字体为白色：<code>UIStatusBarStyleLightContent</code></p>
