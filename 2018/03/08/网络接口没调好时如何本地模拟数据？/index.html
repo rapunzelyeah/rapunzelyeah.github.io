@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="网络接口没调好时如何本地模拟数据？"/>
+
+
+
+
+  <meta name="keywords" content="iOS, rapunzel blog" />
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="rapunzel blog">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.6.0" />
+
+
+
+<link rel="canonical" href="https://rapunzelyeah.github.io/2018/03/08/网络接口没调好时如何本地模拟数据？/"/>
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.6.0" />
+
+
+
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+    <title> 网络接口没调好时如何本地模拟数据？ - rapunzel blog </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">rapunzel blog</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/categories">
+        <li class="mobile-menu-item">
+          
+          
+            分类
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">rapunzel blog</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/categories">
+            
+            
+              分类
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          网络接口没调好时如何本地模拟数据？
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2018-03-08
+        </span>
+        
+          <div class="post-category">
+            
+              <a href="/categories/iOS开发/">iOS开发</a>
+            
+          </div>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#创建Model"><span class="toc-text">创建Model</span></a></li></ol>
+    </div>
+  </div>
+
+
+    <div class="post-content">
+      
+        <p>在开发时经常会出现的一个状况就是APP打算写界面但后台接口还没做好，这时，像记录、列表这些页面需要展示模拟后台数据，此时，就需要自己做一个假的后台数据在关键时刻撑撑场面。本文就是介绍如何利用YYModel解析自己的假数据。</p>
+<a id="more"></a>
+<h3 id="创建Model"><a href="#创建Model" class="headerlink" title="创建Model"></a>创建Model</h3><p>首先需要创建model，这种列表数据一般是放在model的<code>data</code>里作为一个数组的形式，所以，先建一个总的model用来盛放<code>data</code>数组。<br>OrderListModel.h文件</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">"BaseModel.h"</span></span></span><br><span class="line"><span class="meta">#import <span class="meta-string">"OrderModel.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">OrderListModel</span> : <span class="title">BaseModel</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>, <span class="keyword">strong</span>) <span class="built_in">NSMutableArray</span> &lt;OrderModel *&gt;*data;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>OrderListModel.m文件</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">"OrderListModel.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">OrderListModel</span></span></span><br><span class="line"></span><br><span class="line">+ (<span class="keyword">nullable</span> <span class="built_in">NSDictionary</span>&lt;<span class="built_in">NSString</span> *, <span class="keyword">id</span>&gt; *)modelContainerPropertyGenericClass &#123;</span><br><span class="line">    <span class="keyword">return</span> @&#123;<span class="string">@"data"</span>:[OrderModel <span class="keyword">class</span>]&#125;;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>然后就是数组内单独的model数据，也是界面列表中需要展示的单条数据。<br>OrderModel.h文件</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">OrderModel</span> : <span class="title">NSObject</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>) <span class="built_in">NSString</span> *orderId;        <span class="comment">//订单号</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>) <span class="built_in">NSString</span> *memberId;       <span class="comment">//会员id</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>) <span class="built_in">NSString</span> *status;         <span class="comment">//状态 01：待确认 02：处理中，03成功，04：失败，05：中止，99：异常</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>) <span class="built_in">NSString</span> *bankName;       <span class="comment">//银行名称</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>) <span class="built_in">NSString</span> *cardNo;         <span class="comment">//卡号</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>) <span class="built_in">NSString</span> *cardType;       <span class="comment">//卡类型 0：借记卡，1：信用卡，2：其他</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>) <span class="built_in">NSString</span> *amount;         <span class="comment">//订单金额(单位：分)</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>) <span class="built_in">NSString</span> *compAmount;     <span class="comment">//订单完成金额(单位：分)</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>) <span class="built_in">NSString</span> *fee;            <span class="comment">//手续费(单位：分)</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>) <span class="built_in">NSString</span> *compFee;        <span class="comment">//完成手续费(单位：分)</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">copy</span>) <span class="built_in">NSString</span> *billDate;       <span class="comment">//还款日期</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>OrderModel.m文件</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">"OrderModel.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">OrderModel</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<p>在需要模拟数据的界面，添加<code>model</code>类以及<code>YYModel</code>：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#import <span class="meta-string">"OrderModel.h"</span></span></span><br><span class="line"><span class="meta">#import  <span class="meta-string">&lt;YYModel/YYModel.h&gt;</span></span></span><br><span class="line"><span class="meta">#import <span class="meta-string">"OrderListModel.h"</span></span></span><br></pre></td></tr></table></figure>
+<p>创建dict数据：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">NSDictionary</span> *subDict1 = @&#123;</span><br><span class="line">                               <span class="string">@"memberId"</span>:<span class="string">@"402751926960390144"</span>,</span><br><span class="line">                               <span class="string">@"status"</span>:<span class="string">@"01"</span>,</span><br><span class="line">                               <span class="string">@"customerName"</span>:<span class="string">@"杨晓"</span>,</span><br><span class="line">                               <span class="string">@"customerIdNo"</span>:<span class="string">@"340825198004215232"</span>,</span><br><span class="line">                               <span class="string">@"bankName"</span>:<span class="string">@"中国银行"</span>,</span><br><span class="line">                               <span class="string">@"bankCode"</span>:<span class="string">@"aa1"</span>,</span><br><span class="line">                               <span class="string">@"cardNo"</span>:<span class="string">@"43420024420024"</span>,</span><br><span class="line">                               <span class="string">@"cardType"</span>:<span class="string">@"ok"</span>,</span><br><span class="line">                               <span class="string">@"cvv2"</span>:<span class="string">@"1000"</span>,</span><br><span class="line">                               <span class="string">@"expiredDate"</span>:<span class="string">@""</span>,</span><br><span class="line">                               <span class="string">@"orderId"</span>:<span class="string">@"1234567890"</span>,</span><br><span class="line">                               <span class="string">@"mobile"</span>:<span class="string">@"1837856382"</span>,</span><br><span class="line">                               <span class="string">@"amount"</span>:@<span class="number">1999</span>,</span><br><span class="line">                               <span class="string">@"compAmount"</span>:@<span class="number">100</span>,</span><br><span class="line">                               <span class="string">@"fee"</span>:@<span class="number">402751926960390140</span>,</span><br><span class="line">                               <span class="string">@"compFee"</span>:@<span class="number">1000</span>,</span><br><span class="line">                               <span class="string">@"billDate"</span>:<span class="string">@"2018-3"</span>,</span><br><span class="line">                               <span class="string">@"isDel"</span>:<span class="string">@"N"</span>,</span><br><span class="line">                               &#125;;</span><br><span class="line">                               <span class="built_in">NSMutableArray</span>&lt;OrderModel *&gt; *array = [<span class="built_in">NSMutableArray</span> arrayWithObjects: subDict1, subDict1, subDict1, subDict2, subDict3, subDict3, subDict3, subDict3, <span class="literal">nil</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">NSDictionary</span> *dict;</span><br><span class="line">    dict = @&#123;</span><br><span class="line">             <span class="string">@"code"</span>:<span class="string">@"000000"</span>,</span><br><span class="line">             <span class="string">@"timestamp"</span>:<span class="string">@"1516340698125"</span>,</span><br><span class="line">             <span class="string">@"msg"</span>:<span class="string">@"成功"</span>,</span><br><span class="line">             <span class="string">@"data"</span>:array&#125;;</span><br></pre></td></tr></table></figure>
+<p>这里有两种方法将<code>dict</code>转为<code>OrderListModel</code>类型:</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">OrderListModel *listModel = [[OrderListModel alloc] init];</span><br><span class="line">    [listModel yy_modelSetWithDictionary:dict];</span><br></pre></td></tr></table></figure>
+<p>或者使用：</p>
+<figure class="highlight objc"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OrderListModel *listModel1 = [OrderListModel yy_modelWithJSON:dict];</span><br></pre></td></tr></table></figure>
+<p>此时，模拟接口返回的数据就完成了，在需要展示的地方调用<code>listModel</code>或者<code>listModel1</code>的<code>data</code>字段，得到数组，然后再展示就可以，这种方式可以避免我们在开发时由于没有接口导致自己的界面开发受堵塞的情况。</p>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="https://rapunzelyeah.github.io">rapunzel</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="https://rapunzelyeah.github.io/2018/03/08/网络接口没调好时如何本地模拟数据？/">https://rapunzelyeah.github.io/2018/03/08/网络接口没调好时如何本地模拟数据？/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/iOS/">iOS</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2018/01/08/iOS新建项目基本配置/">
+        <span class="next-text nav-default">iOS新建项目基本配置</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:doubleday731@163.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/rapunzelyeah" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+        
+          <a href="https://www.zhihu.com/people/rapunzel-10/activities" class="iconfont icon-zhihu" title="zhihu"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    
+    
+      
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2016 - 
+    
+    2018
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">rapunzel</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+
+
+
+    
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.6.0"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=2.6.0"></script>
+
+  </body>
+</html>
